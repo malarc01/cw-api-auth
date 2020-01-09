@@ -9,12 +9,20 @@ module.exports ={
 
 
         const {email,password} = req.value.body
+        // check is user already exist with email input
+        const foundUser = await User.findOne({email:email});
+        if(foundUser){return res.status(403).send({error:'Email is already in use'})}
+
+
+
+        // create new user
         const newUser = new User({
             email:email,
             password: password
         })
         await newUser.save();
 
+        // respond with token
         res.json({user:'created'})
     },
     signIn:async(req,res,next) =>{
