@@ -8,7 +8,7 @@ mongoose.connect('mongodb://localhost/CWAUTH', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-
+mongoose.set('useCreateIndex', true);
 
 const app = express();
 
